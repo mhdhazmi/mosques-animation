@@ -4,3 +4,4 @@ __pycache__/*
 *.claude
 *.mp4
 *.svg
+combined_load_profile_electrical.csv
