@@ -1,0 +1,6 @@
+videos/*
+*.xlsx
+__pycache__/*
+*.claude
+*.mp4
+*.svg
