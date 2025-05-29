@@ -53,11 +53,15 @@ def plot_24hour_consumption(meter_id='AES2020896472402', target_date='2023-05-10
     for hour in night_hours:
         if hour >= 21:  # Evening night hours (21, 22, 23)
             night_start = pd.to_datetime(f"{target_date} {hour:02d}:00:00")
-            night_end = pd.to_datetime(f"{target_date} {hour+1:02d}:00:00")
+            if hour == 23:
+                # Handle transition from 23:00 to 00:00 next day
+                next_day = (pd.to_datetime(target_date) + timedelta(days=1)).strftime('%Y-%m-%d')
+                night_end = pd.to_datetime(f"{next_day} 00:00:00")
+            else:
+                night_end = pd.to_datetime(f"{target_date} {hour+1:02d}:00:00")
         else:  # Early morning night hours (0, 1, 2, 3, 4)
-            next_day = (pd.to_datetime(target_date) + timedelta(days=1)).strftime('%Y-%m-%d')
-            night_start = pd.to_datetime(f"{next_day} {hour:02d}:00:00")
-            night_end = pd.to_datetime(f"{next_day} {hour+1:02d}:00:00")
+            night_start = pd.to_datetime(f"{target_date} {hour:02d}:00:00")
+            night_end = pd.to_datetime(f"{target_date} {hour+1:02d}:00:00")
         
         ax.axvspan(night_start, night_end, alpha=0.2, color='red', label='Night Hours (9PM-4AM)' if hour == 21 else "")
     
