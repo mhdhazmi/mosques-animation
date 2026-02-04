@@ -11,3 +11,5 @@ ffmpeg
 *.md
 !README.md
 
+*.csv
+ffmpeg
