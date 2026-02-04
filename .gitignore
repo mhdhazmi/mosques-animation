@@ -7,3 +7,7 @@ __pycache__/*
 combined_load_profile_electrical.csvmedia/
 ffmpeg
 *.parquet
+*.ipynb
+*.md
+!README.md
+
